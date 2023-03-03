@@ -12,21 +12,21 @@ spec:
       base:
         apiVersion: k8s.seeq.com/v1alpha1
         kind: SeeqInBox
+        metadata:
+          namespace: default
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
-        - fromFieldPath: metadata.namespace
-          toFieldPath: metadata.namespace
         - fromFieldPath: spec.hostname
           toFieldPath: spec.hostname
     - name: datalab
       base:
         apiVersion: k8s.seeq.com/v1alpha1
         kind: DataLab
+        metadata:
+          namespace: default
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
-        - fromFieldPath: metadata.namespace
-          toFieldPath: metadata.namespace
         - fromFieldPath: spec.hostname
           toFieldPath: spec.hostname
