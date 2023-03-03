@@ -1,0 +1,17 @@
+apiVersion: k8s.seeq.com/v1alpha1
+kind: SeeqTenant
+metadata:
+  name: xyz
+spec:
+  channel: bleeding
+  computeSize: small
+  hostname: xyz.seeq.dev
+  licensing:
+    companyName: XYZ INC!
+    contractNumber: abc0123
+    customerId: xyz01
+    licenseText: |
+      LICENSE rlmez standard 1.0 03-mar-23 uncounted
+        hostid=host=ANY _ck=corrupted sig="corrupted
+        corrupted"
+  location: aws-americas
