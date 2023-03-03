@@ -1,0 +1,77 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xseeqtenants.k8s.seeq.com
+spec:
+  group: k8s.seeq.com
+  names:
+    kind: XSeeqTenant
+    plural: xseeqtenants
+  claimNames:
+    kind: SeeqTenant
+    plural: seeqtenants
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              location:
+                type: string
+                description: The cloud and cluster that this tenant should be deployed.
+                enum:
+                - aws-americas
+                - aws-europe
+                - aws-asia
+                - azure-americas
+                - azure-europe
+                - azure-asia
+              hostname:
+                type: string
+                pattern: '^[a-zA-Z0-9]+\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+$'
+                description: Fully qualified domain name of the tenant. Not all domains are available in all clouds.
+              licensing:
+                type: object
+                properties:
+                  companyName:
+                    type: string
+                    description: Name of the company the license is linked to 
+                  customerId:
+                    type: string
+                    description: Unique customer identifier for the company the license is linked to
+                  contractNumber:
+                    type: string
+                    description: Contract number the license is linked to
+                  licenseText:
+                    type: string
+                    description: Plain text of license file
+                required:
+                - licenseText
+              channel:
+                type: string
+                description: Release channel that this tenant should be subscribed to
+                enum:
+                - bleeding
+                - fast
+                - standard
+                - slow
+                default: standard
+              computeSize:
+                type: string
+                description: Compute size to allocate
+                enum:
+                - small
+                - medium
+                - large
+                default: small
+            required:
+            - location
+            - hostname
+            - licensing
+            - channel
+            - computeSize
