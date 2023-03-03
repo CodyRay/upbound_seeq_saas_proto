@@ -1,0 +1,28 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: deployment-architecture-type-a.k8s.seeq.com
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  compositeTypeRef:
+    apiVersion: k8s.seeq.com/v1alpha1
+    kind: XSeeqTenant
+  resources:
+    - name: seeqinbox
+      base:
+        apiVersion: k8s.seeq.com/v1alpha1
+        kind: SeeqInBox
+      patches:
+        - fromFieldPath: metadata.name
+          toField: metadata.name
+        - fromFieldPath: spec.hostname
+          toFieldPath: spec.hostname
+    - name: seeqinbox
+      base:
+        apiVersion: k8s.seeq.com/v1alpha1
+        kind: DataLab
+      patches:
+        - fromFieldPath: metadata.name
+          toField: metadata.name
+        - fromFieldPath: spec.hostname
+          toFieldPath: spec.hostname
