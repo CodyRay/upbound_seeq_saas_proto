@@ -11,9 +11,7 @@ spec:
     - name: seeqinbox
       base:
         apiVersion: k8s.seeq.com/v1alpha1
-        kind: SeeqInBox
-        metadata:
-          namespace: default
+        kind: XSeeqInBox
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
@@ -22,9 +20,7 @@ spec:
     - name: datalab
       base:
         apiVersion: k8s.seeq.com/v1alpha1
-        kind: DataLab
-        metadata:
-          namespace: default
+        kind: XDataLab
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
